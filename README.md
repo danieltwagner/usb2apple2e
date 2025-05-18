@@ -27,7 +27,31 @@ A nice side-effect of doing this over a terminal connection was that it allowed 
 ```
 
 ## Wiring
-See declaration at the start of `main()`.
+See declaration at the start of `main()`:
+```
+$ picotool info -p
+Fixed Pin Information
+ 0:   Keyboard Y1 (pin 2)
+ 1:   Keyboard Y2 (pin 4)
+ 2:   Keyboard Y3 (pin 6)
+ 3:   Keyboard Y4 (pin 8)
+ 4:   Keyboard Y5 (pin 10)
+ 5:   Keyboard Y6 (pin 23)
+ 6:   Keyboard Y7 (pin 25)
+ 7:   Keyboard Y8 (pin 12)
+ 8:   Keyboard X0 (pin 14)
+ 9:   Keyboard X1 (pin 18)
+ 10:  Keyboard X2 (pin 16)
+ 11:  Keyboard X3 (pin 20)
+ 12:  Keyboard X4 (pin 21)
+ 13:  Keyboard X5 (pin 19)
+ 14:  Keyboard X6 (pin 26)
+ 15:  Keyboard X7 (pin 17)
+ 16:  Keyboard Y0 (pin 1)
+ 17:  Keyboard Y9 (pin 22)
+ 18:  Keyboard SHIFT (pin 24)
+ 25:  On-board LED
+```
 
 ## Building
 ```
