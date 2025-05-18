@@ -35,7 +35,7 @@ typedef struct {
 } MatrixPosition;
 
 // X-line, Y-line, and shift line
-static const std::map<char, MatrixPosition> keyMap = {
+static const std::map<int, MatrixPosition> keyMap = {
     {'A', {X2, Y0, true}},
     {'B', {X3, Y4, true}},
     {'C', {X3, Y2, true}},
@@ -107,5 +107,11 @@ static const std::map<char, MatrixPosition> keyMap = {
     {'}', {X5, Y9, true}},
     {'"', {X6, Y9, true}},
     {'\t', {X1, Y0, false}},
+    {27, {X0, Y0, false}}, // ESC
+    {127, {X7, Y6, false}}, // Backspace -> DEL
+    {'↑', {X6, Y7, false}},
+    {'↓', {X7, Y7, false}},
+    {'→', {X7, Y9, false}},
+    {'←', {X7, Y8, false}},
 };
 

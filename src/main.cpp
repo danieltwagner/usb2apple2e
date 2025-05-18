@@ -55,13 +55,51 @@ int main() {
       printf("Apple 2e keyboard emulator\n");
 
       int key = 0;
+      int nextKey = 0;
       absolute_time_t keyDownTime= 0;
       while (1) {
-            key = getchar();
+            if (nextKey) {
+                  key = nextKey;
+                  nextKey = 0;
+            } else {
+                  key = getchar();
+            }
             if (key != EOF) {
+
+                  if (key == 27) {
+                        // Escape key. Is the next character a '['?
+                        sleep_ms(1); // Give the keyboard a moment to send the next character
+                        nextKey = getchar();
+                        if (nextKey == '[') {
+                              sleep_ms(1);
+                              // Arrow keys
+                              nextKey = getchar();
+                              switch (nextKey) {
+                                    case 'A':
+                                          key = '↑'; // Up arrow
+                                          nextKey = 0;
+                                          break;
+                                    case 'B':
+                                          key = '↓'; // Down arrow
+                                          nextKey = 0;
+                                          break;
+                                    case 'C':
+                                          key = '→'; // Right arrow
+                                          nextKey = 0;
+                                          break;
+                                    case 'D':
+                                          key = '←'; // Left arrow
+                                          nextKey = 0;
+                                          break;
+                                    default:
+                                          nextKey = 0; // Ignore other escape sequences
+                                          continue;
+                              }
+                        }
+                  }
                   key = toupper(key);
                   if (!keyMap.contains(key)) {
-                        printf("Key '%c' not in keymap\n", key);
+                        printf("Key with code '%d' not in keymap\n", key);
                         continue;
                   }
                   MatrixPosition pos = keyMap.at(key);
