@@ -8,10 +8,10 @@
 #define LED_PIN 25
 
 int main() {
-      
+
       bi_decl(bi_program_description("Apple 2e keyboard emulator"));
       bi_decl(bi_1pin_with_name(LED_PIN, "On-board LED"));
-      
+
       bi_decl(bi_1pin_with_name(Y0, "Keyboard Y0 (pin 1)"));
       bi_decl(bi_1pin_with_name(Y1, "Keyboard Y1 (pin 2)"));
       bi_decl(bi_1pin_with_name(Y2, "Keyboard Y2 (pin 4)"));
@@ -53,7 +53,7 @@ int main() {
       stdio_init_all();
 
       printf("Apple 2e keyboard emulator\n");
-      
+
       int key = 0;
       absolute_time_t keyDownTime= 0;
       while (1) {
@@ -87,15 +87,24 @@ int main() {
                         }
                         gpio_put(pos.y, 0);
 
-                        // Press keys for 100ms
-                        if (absolute_time_diff_us(keyDownTime, get_absolute_time()) > 50000) {
+                        // Press keys for 20ms
+                        if (absolute_time_diff_us(keyDownTime, get_absolute_time()) > 20000) {
                               break;
                         }
                   }
                   gpio_put(SHIFT_PIN, 0);
                   gpio_put(LED_PIN, 0);
                   printf("Key %c pressed at (%d, %d)\n", key, pos.x, pos.y);
-                  sleep_ms(20); // this allows us to press repeated keys
+
+                  // this allows us to press repeated keys, which would otherwise
+                  // appear as a single (longer) keypress
+                  sleep_ms(5);
+                  if (key == '\r') {
+                        // Simplify copy-pasting multiple lines of BASIC.
+                        // Otherwise it may swallow the start of the next line.
+                        sleep_ms(250);
+                  }
+
             }
       }
 }
