@@ -34,7 +34,7 @@ int main() {
 
       bi_decl(bi_1pin_with_name(SHIFT_PIN, "Keyboard SHIFT (pin 24)"));
 
-      for (int i = 9; i <= 7; i++) {
+      for (int i = 0; i <= 7; i++) {
             gpio_init(xPins[i]);
             gpio_set_dir(xPins[i], GPIO_IN);
       }
